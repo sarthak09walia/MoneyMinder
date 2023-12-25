@@ -1,4 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 module.exports = {
-  jwtSecret: "JWT Secret",
+  jwtSecret: process.env.JWT_KEY,
   jwtSession: { session: false },
 };
+// jwtSecret: process.env.JWT_KEY,

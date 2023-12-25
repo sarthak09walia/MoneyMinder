@@ -4,6 +4,19 @@ const Schema = mongoose.Schema;
 const FinanceSchema = new Schema({
   category: {
     type: String,
+    enum: [
+      "Rent/Mortgage",
+      "Utilities",
+      "Groceries",
+      "Dining Out",
+      "Transportation",
+      "Health",
+      "Entertainment",
+      "Personal Care",
+      "Shopping",
+      "Savings/Investments",
+      "Miscellaneous",
+    ],
     required: true,
   },
   price: {

@@ -6,12 +6,11 @@ const financeController = require("./controllers/financeController");
 const LocalStrategy = require("passport-local");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-const dotenv = require("dotenv");
-dotenv.config();
 
 require("./Middlewares/auth.js")();
 
@@ -27,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use(
   session({
-    secret: "your secret",
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
   })
@@ -62,6 +61,10 @@ app
   .patch(
     passport.authenticate("jwt", { session: false }),
     financeController.patchFinanceInformation
+  )
+  .delete(
+    passport.authenticate("jwt", { session: false }),
+    financeController.deleteFinanceInformation
   );
 
 app.listen(8000, () => {
